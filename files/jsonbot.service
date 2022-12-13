@@ -1,0 +1,17 @@
+[Unit]
+Description=JSONBOT - The JSON Everywhere Bot
+After=multi-user.target
+
+[Service]
+Type=simple
+User=jsonbot
+Group=jsonrbot
+DynamicUser=yes
+StateDirectory=jsonbot
+LogsDirectory=jsonbot
+CacheDirectory=jsonbot
+ExecStart=/usr/local/bin/jsonbotd
+CapabilityBoundingSet=CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target

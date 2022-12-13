@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# This file is placed in the Public Domain.
+# pylint: disable=C0114,C0115,C0116,C0413,R0801
+
+
+"The JSON Everywhere Bot"
+
+
+__version__ = "100"
+
+
+import sys
+
+
+from jsonbot import Cfg, Handler, command, Wd, parse, scan
+from jsonbot import cmds, irc, rss
+
+
+Wd.workdir = "/var/lib/jsonbot/"
+
+
+scan(cmds)
+scan(irc)
+scan(rss)
+
+
+class CLI(Handler):
+
+    @staticmethod
+    def raw(txt):
+        print(txt)
+
+
+def main():
+    parse(' '.join(sys.argv[1:]))
+    cli = CLI()
+    evt = command(cli, Cfg.otxt)
+    evt.wait()
+
+
+main()
